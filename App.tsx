@@ -10,6 +10,9 @@ import OfferScreen from "./src/screens/OfferScreen";
 import CartScreen from "./src/screens/CartScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
+
 export type AppParamList = {
   HomeNav: undefined;
   Landing: undefined;
@@ -77,9 +80,11 @@ const AppNavigator = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <AppNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

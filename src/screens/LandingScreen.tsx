@@ -3,13 +3,19 @@ import React, { useState, useEffect } from "react";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import * as Location from "expo-location";
 import { AppParamList } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
+import { updateLocation } from "../redux/reducers/userReducer";
+import { RootState } from "../redux/store";
 
 const SCREEN_WIDTH = Dimensions.get("screen").width;
 
 type Props = NativeStackScreenProps<AppParamList, "Landing">;
 
 const LandingScreen: React.FC<Props> = ({ route, navigation }) => {
-  //const navigation = useNavigation();
+  const dispatch = useDispatch<any>();
+  const { loading, location } = useSelector(
+    (state: RootState) => state.userReducer
+  );
   const [errorMsg, setErrorMsg] = useState("");
   const [address, setAddress] = useState<Location.LocationGeocodedAddress>();
   const [displayAddress, setDisplayAddress] = useState(
@@ -35,6 +41,7 @@ const LandingScreen: React.FC<Props> = ({ route, navigation }) => {
 
         for (let item of addressResponse) {
           setAddress(item);
+          dispatch(updateLocation(item));
           let currentAddress = `${item.city}, ${item.region}, ${item.postalCode}, ${item.country}`;
           if (currentAddress?.length > 0) {
             setTimeout(() => {
