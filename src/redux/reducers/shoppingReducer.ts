@@ -14,7 +14,7 @@ export const fetchAvailableItems = createAsyncThunk(
   "shopping/fetchAvailableItems",
   async (postalCode: string) => {
     const response = await api.get<FoodAvailability>(
-      "/food/availability/400012"
+      `/food/availability/400012`
     );
 
     return response.data as FoodAvailability;

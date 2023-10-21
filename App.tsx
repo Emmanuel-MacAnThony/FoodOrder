@@ -12,17 +12,20 @@ import AccountScreen from "./src/screens/AccountScreen";
 
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
-
-export type AppParamList = {
-  HomeNav: undefined;
-  Landing: undefined;
-};
+import { NavigatorScreenParams } from "@react-navigation/native";
+import SearchScreen from "./src/screens/SearchScreen";
 
 export type HomeParamList = {
   Home: undefined;
   Cart: undefined;
   Offer: undefined;
   Account: undefined;
+};
+
+export type AppParamList = {
+  HomeNav: NavigatorScreenParams<HomeParamList>;
+  Landing: undefined;
+  Search: undefined;
 };
 
 const Stack = createStackNavigator<AppParamList>();
@@ -73,6 +76,7 @@ const AppNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Landing" component={LandingScreen} />
+      <Stack.Screen name="Search" component={SearchScreen} />
       <Stack.Screen name="HomeNav" component={Home} />
     </Stack.Navigator>
   );

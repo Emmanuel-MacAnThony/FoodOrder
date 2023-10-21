@@ -6,10 +6,16 @@ import { AppParamList } from "../../App";
 import { useDispatch, useSelector } from "react-redux";
 import { updateLocation } from "../redux/reducers/userReducer";
 import { RootState } from "../redux/store";
+import type { CompositeScreenProps } from "@react-navigation/native";
+import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import type { StackScreenProps } from "@react-navigation/stack";
 
 const SCREEN_WIDTH = Dimensions.get("screen").width;
 
-type Props = NativeStackScreenProps<AppParamList, "Landing">;
+type Props = CompositeScreenProps<
+  NativeStackScreenProps<AppParamList, "Landing">,
+  StackScreenProps<AppParamList>
+>;
 
 const LandingScreen: React.FC<Props> = ({ route, navigation }) => {
   const dispatch = useDispatch<any>();
@@ -45,7 +51,9 @@ const LandingScreen: React.FC<Props> = ({ route, navigation }) => {
           let currentAddress = `${item.city}, ${item.region}, ${item.postalCode}, ${item.country}`;
           if (currentAddress?.length > 0) {
             setTimeout(() => {
-              navigation.navigate("HomeNav");
+              navigation.navigate("HomeNav", {
+                screen: "Home",
+              });
             }, 2000);
           }
           setDisplayAddress(currentAddress);

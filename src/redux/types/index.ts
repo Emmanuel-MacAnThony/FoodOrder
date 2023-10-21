@@ -3,6 +3,7 @@ import { LocationGeocodedAddress } from "expo-location";
 export interface CategoryModel {
   title: string;
   icon: string;
+  id: string;
 }
 
 // Food Model
@@ -14,7 +15,7 @@ export interface FoodModel {
   category: String;
   price: number;
   readyTime: number;
-  image: [string];
+  images: [string];
 }
 
 // Restaurant Model
